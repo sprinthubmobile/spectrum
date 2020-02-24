@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:spectrum_autoPadding="true"
-        app:spectrum_outlineWidth="2dp"
-        app:spectrum_colors="@array/demo_colors" />
+        app:spectrum_outlineWidth="0dp"
+        app:spectrum_colors="@array/demo_colors"
+        app:spectrum_columnCount="4"/>
 
 </android.support.v4.widget.NestedScrollView>

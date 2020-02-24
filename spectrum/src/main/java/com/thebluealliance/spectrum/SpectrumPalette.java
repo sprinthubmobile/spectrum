@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class SpectrumPalette extends LinearLayout {
 
     private int mColorItemDimension;
     private int mColorItemMargin;
+    private int mTextViewMargin;
     private @ColorInt int[] mColors;
     private @ColorInt int mSelectedColor;
     private OnColorSelectedListener mListener;
@@ -85,7 +87,8 @@ public class SpectrumPalette extends LinearLayout {
         mEventBus.register(this);
 
         mColorItemDimension = getResources().getDimensionPixelSize(R.dimen.color_item_small);
-        mColorItemMargin = getResources().getDimensionPixelSize(R.dimen.color_item_margins_small);
+        mColorItemMargin = getResources().getDimensionPixelSize(R.dimen.color_item_margins_xlarge);
+        mTextViewMargin = getResources().getDimensionPixelSize(R.dimen.color_item_margins_small);
 
         setOrientation(LinearLayout.VERTICAL);
     }
@@ -271,20 +274,46 @@ public class SpectrumPalette extends LinearLayout {
         return row;
     }
 
-    private ColorItem createColorItem(int color, int selectedColor) {
+    private LinearLayout createColorItem(int color, int selectedColor) {
+        LinearLayout colorPalleteLinearLayout = new LinearLayout(getContext());
+        colorPalleteLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams colourPalletLinearLayoutparams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
+
+        colorPalleteLinearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+        colourPalletLinearLayoutparams.setMargins(0, mTextViewMargin, 0, mTextViewMargin);
+       
+        colorPalleteLinearLayout.setLayoutParams(colourPalletLinearLayoutparams);
+
         ColorItem view = new ColorItem(getContext(), color, color == selectedColor, mEventBus);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mColorItemDimension, mColorItemDimension);
-        params.setMargins(mColorItemMargin, mColorItemMargin, mColorItemMargin, mColorItemMargin);
+        params.setMargins(mColorItemMargin, mTextViewMargin, mColorItemMargin, mTextViewMargin);
         view.setLayoutParams(params);
+
+
+        TextView textView = new TextView((getContext()));
+        Log.d("TEST", String.valueOf(color));
+        textView.setText(convertHexCodeTOString(color));
+        textView.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT);
+//        textParams.setMargins(0, mTextViewMargin, 0, mTextViewMargin);
+        textView.setLayoutParams(textParams);
+
         if (mOutlineWidth != 0) {
             view.setOutlineWidth(mOutlineWidth);
         }
+
         mItems.add(view);
-        return view;
+        colorPalleteLinearLayout.addView(view);
+        colorPalleteLinearLayout.addView(textView);
+
+        return colorPalleteLinearLayout;
     }
 
     private ImageView createSpacer() {
         ImageView view = new ImageView(getContext());
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mColorItemDimension, mColorItemDimension);
         params.setMargins(mColorItemMargin, mColorItemMargin, mColorItemMargin, mColorItemMargin);
         view.setLayoutParams(params);
@@ -342,6 +371,55 @@ public class SpectrumPalette extends LinearLayout {
             requestLayout();
             invalidate();
         }
+    }
+
+
+    private String convertHexCodeTOString(int hexCode){
+
+        String colour  = "";
+        Log.d("TEST","#"+Integer.toHexString(hexCode).toUpperCase());
+        switch ("#" + Integer.toHexString(hexCode).toUpperCase()){
+
+           case  "#FF0000AE":
+              colour = "Blue";
+              break;
+            case "#FFFF69B4":
+                colour = "pink";
+                break;
+            case "#FF00B086":
+                colour = "green";
+                break;
+            case  "#FFFF9900":
+                colour = "Orange";
+                break;
+            case  "#FFDF0000":
+                colour = "Red";
+                break;
+            case "#FFC0C0C0":
+                colour = "Grey";
+                break;
+            case "#FF1B1B1B":
+                colour = "Black";
+                break;
+            case "#FFFFFFFF"  :
+                colour ="white";
+                break;
+
+            case "#FFFFF500":
+                colour = "Yellow";
+                break;
+
+            case "#FF800080":
+                colour = "purple";
+                break;
+
+            default:
+               colour = "Unknown";
+               break;
+        }
+
+        return colour;
+
     }
 
 }
