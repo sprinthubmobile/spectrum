@@ -282,7 +282,7 @@ public class SpectrumPalette extends LinearLayout {
 
         colorPalleteLinearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
         colourPalletLinearLayoutparams.setMargins(0, mTextViewMargin, 0, mTextViewMargin);
-       
+
         colorPalleteLinearLayout.setLayoutParams(colourPalletLinearLayoutparams);
 
         ColorItem view = new ColorItem(getContext(), color, color == selectedColor, mEventBus);
