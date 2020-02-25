@@ -248,6 +248,7 @@ public class SpectrumPalette extends LinearLayout {
             row.addView(colorItem);
             numItemsInRow++;
 
+
             if (numItemsInRow == mNumColumns) {
                 addView(row);
                 row = createRow();
@@ -293,7 +294,11 @@ public class SpectrumPalette extends LinearLayout {
 
         TextView textView = new TextView((getContext()));
         Log.d("TEST", String.valueOf(color));
-        textView.setText(convertHexCodeTOString(color));
+        String colour = convertHexCodeTOString(color);
+        if(colour.equals("White")){
+            view.setOutlineWidth(2);
+        }
+        textView.setText(colour);
         textView.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
@@ -384,10 +389,10 @@ public class SpectrumPalette extends LinearLayout {
               colour = "Blue";
               break;
             case "#FFFF69B4":
-                colour = "pink";
+                colour = "Pink";
                 break;
             case "#FF00B086":
-                colour = "green";
+                colour = "Green";
                 break;
             case  "#FFFF9900":
                 colour = "Orange";
@@ -402,7 +407,7 @@ public class SpectrumPalette extends LinearLayout {
                 colour = "Black";
                 break;
             case "#FFFFFFFF"  :
-                colour ="white";
+                colour ="White";
                 break;
 
             case "#FFFFF500":
@@ -410,7 +415,7 @@ public class SpectrumPalette extends LinearLayout {
                 break;
 
             case "#FF800080":
-                colour = "purple";
+                colour = "Purple";
                 break;
 
             default:
