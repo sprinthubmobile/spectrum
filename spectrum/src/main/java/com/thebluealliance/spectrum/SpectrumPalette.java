@@ -418,7 +418,7 @@ public class SpectrumPalette extends LinearLayout {
                 colour = "Purple";
                 break;
 
-            case "#9B5D00":
+            case "#FF9B5D00":
                 colour = "Brown";
                 break;
 
