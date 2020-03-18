@@ -67,7 +67,7 @@ public class ColorCircleDrawable extends Drawable {
     @Override
     protected void onBoundsChange(final Rect bounds) {
         super.onBoundsChange(bounds);
-        mRadius = Math.min(bounds.width(), bounds.height()) / 2;
+        mRadius = Math.min(bounds.width(), bounds.height()) / 4;
     }
 
     @Override

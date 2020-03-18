@@ -382,7 +382,7 @@ public class SpectrumPalette extends LinearLayout {
     private String convertHexCodeTOString(int hexCode){
 
         String colour  = "";
-        Log.d("TEST","#"+Integer.toHexString(hexCode).toUpperCase());
+
         switch ("#" + Integer.toHexString(hexCode).toUpperCase()){
 
            case  "#FF0000AE":
@@ -416,6 +416,10 @@ public class SpectrumPalette extends LinearLayout {
 
             case "#FF800080":
                 colour = "Purple";
+                break;
+
+            case "#9B5D00":
+                colour = "Brown";
                 break;
 
             default:
